@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>WelcomePage.qml</file>
+        <file>images/logo@2x.png</file>
+    </qresource>
+</RCC>
