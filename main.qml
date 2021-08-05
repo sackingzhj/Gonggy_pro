@@ -11,6 +11,7 @@ Window {
     minimumHeight: 800
     visible: true
     title: qsTr("工管云_工程施工信息化管理云平台")
+    property string page_url_link: ""
 
 
 

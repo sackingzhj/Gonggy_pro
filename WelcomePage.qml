@@ -36,6 +36,7 @@ Item {
             anchors.topMargin: 30
 
             Text {
+                id: login_text
                 text: qsTr("登    录")
                 anchors.centerIn: parent
                 color: "#0b5dd9"
@@ -43,8 +44,19 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: {
                     dialog.visible = true
+                }
+
+                onEntered: {
+                    parent.color = "#0b5dd9"
+                    login_text.color = "white"
+                }
+
+                onExited: {
+                    parent.color = "white"
+                    login_text.color = "#0b5dd9"
                 }
             }
 
@@ -122,13 +134,13 @@ Item {
 
             model:[
             ["指挥中心","./images/CommandingCommunication.png","CommandingCommunication.qml"],
-            ["成本与进度","./images/CostAndSchedule.png","CommandingCommunication.qml"],
-            ["质量管控","./images/QualityControl.png","CommandingCommunication.qml"],
-            ["安全管理","./images/SafetyManagement.png","CommandingCommunication.qml"],
-            ["劳务、设备、物料管理","./images/LaborRealName.png","CommandingCommunication.qml"],
-            ["物联监测","./images/PhysicalMonitoring.png","CommandingCommunication.qml"],
-            ["工程日志","./images/EngineeringLog.png","CommandingCommunication.qml"],
-            ["资料档案","./images/RecordFile.png","CommandingCommunication.qml"]
+            ["成本与进度","./images/CostAndSchedule.png","CostAndSchedule.qml"],
+            ["质量管控","./images/QualityControl.png","QualityControl.qml"],
+            ["安全管理","./images/SafetyManagement.png","SafetyManagement.qml"],
+            ["劳务、设备、物料管理","./images/LaborRealName.png","LaborRealName.qml"],
+            ["物联监测","./images/PhysicalMonitoring.png","PhysicalMonitoring.qml"],
+            ["工程日志","./images/EngineeringLog.png","EngineeringLog.qml"],
+            ["资料档案","./images/RecordFile.png","RecordFile.qml"]
             ]
 
 
