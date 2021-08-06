@@ -1,8 +1,48 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.3
+
 
 Item {
 
+    MyListviewModel {
+        id:my_list_view_model
+
+    }
+
+    function menu_list_tile(model_title){
+        switch (model_title){
+            case "CommandingCommunication" :
+                mainloader.source = "CommandingCommunication.qml"
+                break;
+            case "CostAndSchedule" :
+                listview.model = my_list_view_model.resources[0];
+                break;
+            case "QualityControl" :
+                listview.model = my_list_view_model.resources[1];
+                break;
+            case "SafetyManagement" :
+                listview.model = my_list_view_model.resources[2];
+                break;
+            case "LaborRealName" :
+                listview.model = my_list_view_model.resources[3];
+                break;
+            case "PhysicalMonitoring" :
+                listview.model = my_list_view_model.resources[4];
+                break;
+            case "EngineeringLog" :
+                listview.model = my_list_view_model.resources[5];
+                break;
+            case "RecordFile" :
+                listview.model = my_list_view_model.resources[6];
+                break;
+            default:
+                 break;
+
+
+        }
+
+    }
 
     Rectangle {
         id: left_menu
@@ -23,74 +63,30 @@ Item {
 
         Text {
             id: pro_name
-            text: qsTr("劳务、设备、物料管理")
+            text: page_title_xml
             font.pointSize: 12
             font.bold: true
             color: "white"
             anchors.top: parent.top
             anchors.topMargin: 25
             anchors.left: menu_logo.right
-            anchors.leftMargin: 3
+            anchors.leftMargin: (175 - width) / 2
         }
+
+
 
         ListView {
             id:listview
-            model:ListModel {
-                ListElement{
-                    nametitle: "代办事项";
-                    menugroup: "代办事项";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "经济合同登记";
-                    menugroup: "劳务实名制";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "人员进出场登记";
-                    menugroup: "劳务实名制";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "安全教育培训";
-                    menugroup: "劳务实名制";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "设备进出场登记";
-                    menugroup: "设备管理";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "特种设备作业人员";
-                    menugroup: "设备管理";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "设备巡检保养";
-                    menugroup: "设备管理";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "材料进出场登记";
-                    menugroup: "物资管理";
-                    menuurl:"MainDetails.qml";
-                }
-                ListElement{
-                    nametitle: "材料进厂检验";
-                    menugroup: "物资管理";
-                    menuurl:"MainDetails.qml";
-                }
-            }
+            model: menu_list_tile(page_xml)
             delegate: menu_delegate
             anchors.top: pro_name.bottom
-            anchors.topMargin: 100
+            anchors.topMargin: 80
             anchors.fill: parent
             focus: true
-
             section.property: "menugroup"
             section.delegate: section_delegate
             section.criteria: ViewSection.FullString
+
         }
 
 
@@ -99,12 +95,12 @@ Item {
             Item{
                 id:menu_delegate_item
                 width: 210
-                height: 50
+                height: 45
                 anchors.left: parent.left
 
                Rectangle {
                    width: 210
-                   height: 50
+                   height: 45
                    color: menu_delegate_item.ListView.isCurrentItem ? "#1890ff" : "#000c17"
                    anchors.verticalCenter: parent.verticalCenter
                    anchors.left: parent.left
@@ -139,7 +135,7 @@ Item {
             id:section_delegate
             Rectangle {
                 width: 210
-                height: 50
+                height: 45
                 color: "#001529"
                 Image {
                     id: meun_icon
@@ -369,3 +365,4 @@ Item {
 
     }
 }
+

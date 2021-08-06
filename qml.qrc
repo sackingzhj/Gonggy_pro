@@ -4,12 +4,6 @@
         <file>WelcomePage.qml</file>
         <file>images/logo@2x.png</file>
         <file>CommandingCommunication.qml</file>
-        <file>CostAndSchedule.qml</file>
-        <file>QualityControl.qml</file>
-        <file>SafetyManagement.qml</file>
-        <file>LaborRealName.qml</file>
-        <file>EngineeringLog.qml</file>
-        <file>RecordFile.qml</file>
         <file>images/mail.png</file>
         <file>images/phone.png</file>
         <file>images/wx-code.png</file>
@@ -20,7 +14,6 @@
         <file>images/QualityControl.png</file>
         <file>images/SafetyManagement.png</file>
         <file>images/LaborRealName.png</file>
-        <file>PhysicalMonitoring.qml</file>
         <file>images/PhysicalMonitoring.png</file>
         <file>images/EngineeringLog.png</file>
         <file>images/RecordFile.png</file>
@@ -30,5 +23,7 @@
         <file>images/message_img.png</file>
         <file>images/menu_icon.png</file>
         <file>MainDetails.qml</file>
+        <file>BusinessPage.qml</file>
+        <file>MyListviewModel.qml</file>
     </qresource>
 </RCC>

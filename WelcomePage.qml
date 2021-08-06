@@ -133,14 +133,14 @@ Item {
             id:rep_content
 
             model:[
-            ["指挥中心","./images/CommandingCommunication.png","CommandingCommunication.qml"],
-            ["成本与进度","./images/CostAndSchedule.png","CostAndSchedule.qml"],
-            ["质量管控","./images/QualityControl.png","QualityControl.qml"],
-            ["安全管理","./images/SafetyManagement.png","SafetyManagement.qml"],
-            ["劳务、设备、物料管理","./images/LaborRealName.png","LaborRealName.qml"],
-            ["物联监测","./images/PhysicalMonitoring.png","PhysicalMonitoring.qml"],
-            ["工程日志","./images/EngineeringLog.png","EngineeringLog.qml"],
-            ["资料档案","./images/RecordFile.png","RecordFile.qml"]
+            ["数 据 指 挥 中 心","./images/CommandingCommunication.png","CommandingCommunication"],
+            ["财务成本与工程进度","./images/CostAndSchedule.png","CostAndSchedule"],
+            ["工 程 质 量 管 控","./images/QualityControl.png","QualityControl"],
+            ["工 程 安 全 管 理","./images/SafetyManagement.png","SafetyManagement"],
+            ["劳务、设备、材料管理","./images/LaborRealName.png","LaborRealName"],
+            ["智 慧 物 联 监 测","./images/PhysicalMonitoring.png","PhysicalMonitoring"],
+            ["施 工 工 程 日 志","./images/EngineeringLog.png","EngineeringLog"],
+            ["竣 工 资 料 档 案","./images/RecordFile.png","RecordFile"]
             ]
 
 
@@ -189,7 +189,10 @@ Item {
                     }
 
                     onClicked: {
-                        mainloader.source = rep_content.model[index][2]
+                        page_xml = rep_content.model[index][2]
+                        page_title_xml = rep_content.model[index][0]
+                        mainloader.source = "BusinessPage.qml"
+
                     }
 
 
