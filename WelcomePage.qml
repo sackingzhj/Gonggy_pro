@@ -1,6 +1,7 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.1
+import ConnectHost 1.0
 
 
 Item {
@@ -35,6 +36,8 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 30
 
+
+
             Text {
                 id: login_text
                 text: qsTr("登    录")
@@ -47,6 +50,8 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     dialog.visible = true
+                    bg_apla.visible = true
+
                 }
 
                 onEntered: {
@@ -270,18 +275,99 @@ Item {
         }
     }
 
+    Rectangle {
+        id:bg_apla
+        width: root.width
+        height: root.height
+        color: Qt.rgba(0.2,0.2,0.2,0.3)
+        visible: false
+        z:5
+    }
+
     Dialog {
          id: dialog
-         title: "Title"
+         title: "登 录"
          visible: false
-         width: 500
-         height: 400
+         width: 400
+         height: 300
 
-         standardButtons: Dialog.Ok | Dialog.Cancel
+         modal: Qt.WindowModal
+
+
+         Text {
+             id: name_text
+             text: qsTr("用户名：")
+             anchors.left: parent.left
+             anchors.leftMargin: 55
+             anchors.top:parent.top
+             anchors.topMargin: 60
+             font.pointSize: 14
+
+         }
+
+         TextField {
+             id: username_field
+             width: 200
+             height: 26
+             placeholderText: qsTr(" 请输入用户名！")
+             font.pointSize: 14
+             verticalAlignment: TextInput.AlignVCenter;
+             anchors.left: parent.left
+             anchors.leftMargin: 130
+             anchors.top:parent.top
+             anchors.topMargin: 60
+         }
+
+         Text {
+             id: pass_text
+             text: qsTr("密   码：")
+             anchors.left: parent.left
+             anchors.leftMargin: 55
+             anchors.top:parent.top
+             anchors.topMargin: 110
+             font.pointSize: 14
+         }
+         TextField {
+             id: password_field
+             width: 200
+             height: 26
+             placeholderText: qsTr(" 请输入密码！")
+             font.pointSize: 14
+             verticalAlignment: TextInput.AlignVCenter;
+             anchors.left: parent.left
+             anchors.leftMargin: 130
+             anchors.top:parent.top
+             anchors.topMargin: 110
+         }
+
+
+         ConnectHost {
+             id: c_host_socket
+             username: username_field.text
+             password: password_field.text
+         }
+
+         DialogButtonBox {
+             anchors.horizontalCenter: parent.horizontalCenter
+             anchors.top: password_field.bottom
+             anchors.topMargin: 20
+             standardButtons: Dialog.Ok | Dialog.Cancel
+
+
+             onAccepted: {
+                c_host_socket.myConnentToSever()
+             }
+             onRejected: {
+                bg_apla.visible = false
+             }
+
+
+         }
+
          anchors.centerIn: parent
 
-         onAccepted: console.log("Ok clicked")
-         onRejected: console.log("Cancel clicked")
+
+
      }
 
 }

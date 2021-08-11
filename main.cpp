@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QLocale>
 #include <QTranslator>
+#include "connecthost.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +11,8 @@ int main(int argc, char *argv[])
 #endif
 
     QApplication app(argc, argv);
+
+    qmlRegisterType<ConnectHost>("ConnectHost", 1,0,"ConnectHost");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
