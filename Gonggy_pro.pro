@@ -9,7 +9,9 @@ CONFIG += c++11
 SOURCES += \
         connecthost.cpp \
         main.cpp \
-        menuxmlmodel.cpp
+        menuxmlmodel.cpp \
+        myreadjson.cpp \
+        udpconnect.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,4 +36,6 @@ RC_ICONS = ./images/favicon.ico
 
 HEADERS += \
     connecthost.h \
-    menuxmlmodel.h
+    menuxmlmodel.h \
+    myreadjson.h \
+    udpconnect.h

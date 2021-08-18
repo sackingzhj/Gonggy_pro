@@ -3,6 +3,8 @@
 #include <QLocale>
 #include <QTranslator>
 #include "connecthost.h"
+#include "myreadjson.h"
+#include "udpconnect.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +15,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     qmlRegisterType<ConnectHost>("ConnectHost", 1,0,"ConnectHost");
+//    qmlRegisterType<MyReadJson>("MyReadJson", 1, 0, "MyReadJson");
+//    qmlRegisterType<UdpConnect>("UdpConnect", 1, 0, "UdpConnect");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

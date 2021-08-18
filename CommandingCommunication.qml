@@ -26,7 +26,7 @@ Item {
 
             Text {
                 id: back_welcomepage
-                text: qsTr("返回主菜单")
+                text: qsTr( "返回主菜单" )
                 anchors.centerIn: parent
                 color: "#0b5dd9"
             }

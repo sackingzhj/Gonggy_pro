@@ -35,7 +35,7 @@ Item {
             menuurl:"MainDetails.qml";
         }
         ListElement{
-            nametitle: "施工图复核";
+            nametitle: "施工图复核" ;
             menugroup: "计量支付业务";
             menuurl:"MainDetails.qml";
         }

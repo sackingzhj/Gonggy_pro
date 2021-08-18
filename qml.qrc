@@ -25,5 +25,8 @@
         <file>MainDetails.qml</file>
         <file>BusinessPage.qml</file>
         <file>MyListviewModel.qml</file>
+        <file>images/dialog_bg.png</file>
+        <file>xml/LaborRealName.xml</file>
+        <file>xml/myfile.json</file>
     </qresource>
 </RCC>

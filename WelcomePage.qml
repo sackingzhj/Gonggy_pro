@@ -2,6 +2,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.1
 import ConnectHost 1.0
+//import UdpConnect 1.0
 
 
 Item {
@@ -40,7 +41,7 @@ Item {
 
             Text {
                 id: login_text
-                text: qsTr("登    录")
+                text: qsTr("帮助中心")
                 anchors.centerIn: parent
                 color: "#0b5dd9"
             }
@@ -49,8 +50,7 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    dialog.visible = true
-                    bg_apla.visible = true
+
 
                 }
 
@@ -138,14 +138,14 @@ Item {
             id:rep_content
 
             model:[
-            ["数 据 指 挥 中 心","./images/CommandingCommunication.png","CommandingCommunication"],
-            ["财务成本与工程进度","./images/CostAndSchedule.png","CostAndSchedule"],
-            ["工 程 质 量 管 控","./images/QualityControl.png","QualityControl"],
-            ["工 程 安 全 管 理","./images/SafetyManagement.png","SafetyManagement"],
-            ["劳务、设备、材料管理","./images/LaborRealName.png","LaborRealName"],
-            ["智 慧 物 联 监 测","./images/PhysicalMonitoring.png","PhysicalMonitoring"],
-            ["施 工 工 程 日 志","./images/EngineeringLog.png","EngineeringLog"],
-            ["竣 工 资 料 档 案","./images/RecordFile.png","RecordFile"]
+            ["数 据 指 挥 中 心", "./images/CommandingCommunication.png","CommandingCommunication"],
+            ["财务成本与工程进度", "./images/CostAndSchedule.png","CostAndSchedule"],
+            ["工 程 质 量 管 控", "./images/QualityControl.png","QualityControl"],
+            ["工 程 安 全 管 理", "./images/SafetyManagement.png","SafetyManagement"],
+            ["劳务、设备、材料管理", "./images/LaborRealName.png","LaborRealName"],
+            ["智 慧 物 联 监 测", "./images/PhysicalMonitoring.png","PhysicalMonitoring"],
+            ["施 工 工 程 日 志", "./images/EngineeringLog.png","EngineeringLog"],
+            ["竣 工 资 料 档 案", "./images/RecordFile.png","RecordFile"]
             ]
 
 
@@ -196,7 +196,12 @@ Item {
                     onClicked: {
                         page_xml = rep_content.model[index][2]
                         page_title_xml = rep_content.model[index][0]
-                        mainloader.source = "BusinessPage.qml"
+                        if(root.isLogin === 1){
+                            mainloader.source = "BusinessPage.qml"
+                        }else{
+                            dialog.visible = true
+                        }
+
 
                     }
 
@@ -275,99 +280,254 @@ Item {
         }
     }
 
-    Rectangle {
-        id:bg_apla
-        width: root.width
-        height: root.height
-        color: Qt.rgba(0.2,0.2,0.2,0.3)
-        visible: false
-        z:5
-    }
+//    Rectangle {
+//        id:bg_apla
+//        width: root.width
+//        height: root.height
+//        color: Qt.rgba(0.2,0.2,0.2,0.3)
+//        visible: false
+//        z:5
+//    }
+
+
 
     Dialog {
          id: dialog
-         title: "登 录"
          visible: false
-         width: 400
-         height: 300
-
+         topInset :20
+         bottomInset: 20
+         leftInset: 20
+         rightInset: 20
+         width: 547
+         height: 399
+         BorderImage {
+             source: "images/dialog_bg.png"
+             horizontalTileMode: BorderImage.Repeat
+             verticalTileMode: BorderImage.Repeat
+             width: 547; height: 399
+             border.left: 5; border.top: 5
+             border.right: 5; border.bottom: 5
+             anchors.fill: parent
+         }
+         closePolicy: Popup.NoAutoClose
+         dim: true
+         anchors.centerIn: parent
          modal: Qt.WindowModal
 
 
-         Text {
-             id: name_text
-             text: qsTr("用户名：")
-             anchors.left: parent.left
-             anchors.leftMargin: 55
-             anchors.top:parent.top
-             anchors.topMargin: 60
-             font.pointSize: 14
-
-         }
-
-         TextField {
-             id: username_field
-             width: 200
-             height: 26
-             placeholderText: qsTr(" 请输入用户名！")
-             font.pointSize: 14
-             verticalAlignment: TextInput.AlignVCenter;
-             anchors.left: parent.left
-             anchors.leftMargin: 130
-             anchors.top:parent.top
-             anchors.topMargin: 60
-         }
 
          Text {
-             id: pass_text
-             text: qsTr("密   码：")
-             anchors.left: parent.left
-             anchors.leftMargin: 55
-             anchors.top:parent.top
-             anchors.topMargin: 110
-             font.pointSize: 14
-         }
-         TextField {
-             id: password_field
-             width: 200
-             height: 26
-             placeholderText: qsTr(" 请输入密码！")
-             font.pointSize: 14
-             verticalAlignment: TextInput.AlignVCenter;
-             anchors.left: parent.left
-             anchors.leftMargin: 130
-             anchors.top:parent.top
-             anchors.topMargin: 110
-         }
+                  id: name_text
+                  text: qsTr("用户名：")
+                  anchors.left: parent.left
+                  anchors.leftMargin: 80
+                  anchors.top:parent.top
+                  anchors.topMargin: 170
+                  font.pixelSize: 20
 
 
-         ConnectHost {
-             id: c_host_socket
-             username: username_field.text
-             password: password_field.text
-         }
+              }
 
-         DialogButtonBox {
-             anchors.horizontalCenter: parent.horizontalCenter
-             anchors.top: password_field.bottom
-             anchors.topMargin: 20
-             standardButtons: Dialog.Ok | Dialog.Cancel
+              TextField {
+                  id: username_field
+                  width: 290
+                  height: 30
+                  placeholderText: qsTr(" 请输入用户名！")
+                  font.pixelSize: 16
+                  verticalAlignment: TextInput.AlignVCenter;
+                  anchors.left: parent.left
+                  anchors.leftMargin: 180
+                  anchors.top:parent.top
+                  anchors.topMargin: 170
+
+                  selectByMouse: true
+
+                  onFocusReasonChanged:{
+                      if ( !(text.length > 0) )
+                      {
+                          username_text_hint.visible = true
+                      }else( (text.length > 0) & (username_text_hint.visible == true))
+                      {
+                          username_text_hint.visible = false
+                      }
+                  }
+
+//                  onFocusChanged: {
+//                        if ( !(text.length > 0) )
+//                        {
+//                            username_text_hint.visible = true
+//                        }
+//                  }
+
+                  Component.onCompleted: {
+                    forceActiveFocus()
+//                    cursorVisible:true
+                  }
+              }
+
+              Text {
+                  id: username_text_hint
+                  text: qsTr("请输入用户名!")
+                  anchors.left: parent.left
+                  anchors.leftMargin: 180
+                  anchors.top:parent.top
+                  anchors.topMargin: 200
+                  font.pixelSize: 12
+                  color: "red"
+                  visible: false
+              }
 
 
-             onAccepted: {
-                c_host_socket.myConnentToSever()
-             }
-             onRejected: {
-                bg_apla.visible = false
-             }
+
+              Text {
+                  id: pass_text
+                  text: qsTr("密   码：")
+                  anchors.left: parent.left
+                  anchors.leftMargin: 80
+                  anchors.top:parent.top
+                  anchors.topMargin: 230
+                  font.pixelSize: 20
+              }
+              TextField {
+                  id: password_field
+                  width: 290
+                  height: 30
+                  placeholderText: qsTr(" 请输入密码！")
+                  font.pixelSize: 16
+                  verticalAlignment: TextInput.AlignVCenter;
+                  anchors.left: parent.left
+                  anchors.leftMargin: 180
+                  anchors.top:parent.top
+                  anchors.topMargin: 230
+                  echoMode: TextInput.Password
+//                  inputMethodHints:Qt.ImhHiddenText | Qt.ImhNoPredictiveText
+                  selectByMouse: true
+
+                  onFocusChanged: {
+                  if ( !(text.length > 0) )
+                      {
+                          pass_text_hint.visible = true
+                      }else( (text.length > 0) & (pass_text_hint.visible == true))
+                      {
+                          pass_text_hint.visible = false
+                      }
+                  }
+
+              }
+
+              Text {
+                  id: pass_text_hint
+                  text: qsTr("请输入密码!")
+                  anchors.left: parent.left
+                  anchors.leftMargin: 180
+                  anchors.top:parent.top
+                  anchors.topMargin: 265
+                  font.pixelSize: 12
+                  color: "red"
+                  visible: false
+              }
 
 
-         }
+              ConnectHost {
+                  id: c_host_socket
+                  username: username_field.text
+                  password: password_field.text
 
-         anchors.centerIn: parent
+                  onNetworkError: {
+                        promptarea.visible = true
+                        promptarea_text.text = "网络错误，请检查您的网络！"
+                  }
+
+                  onLoginFailure: {
+                      promptarea.visible = true
+                      promptarea_text.text = "用户名密码错误，请检查后重新输入"
+                  }
+
+                  onLoginSuccessfully: {
+                      if(root.isLogin === 0){
+                          root.isLogin = 1
+                      }
+                      mainloader.source = "BusinessPage.qml"
+                  }
+              }
 
 
+                  Button {
+                      width: 150
+                      height: 35
+                      text: qsTr("登    录")
 
-     }
+                      DialogButtonBox.buttonRole: DialogButtonBox.Ok
+                      x:100
+                      y:285
+                      onClicked: {
+                            if(username_field.text.length >0 )
+                            {
+                                if(password_field.text > 0)
+                                {
+                                    c_host_socket.username = username_field.text
+                                    c_host_socket.password = password_field.text
+                                    c_host_socket.myConnentToSever()
+                                }else{
+                                        pass_text_hint.visible = true
+                                }
+                            }else{
+                                username_text_hint.visible = true
+                            }
+                      }
+                  }
+
+                  Button {
+                      width: 150
+                      height: 35
+                      text: qsTr("取    消")
+                      DialogButtonBox.buttonRole: DialogButtonBox.Cancel
+                      x:300
+                      y:285
+                      onClicked: {
+                          username_field.text = ""
+                          password_field.text = ""
+                          dialog.reject()
+
+                      }
+                  }
+
+
+                  Rectangle{
+                    id: promptarea
+                    width: 400
+                    height: 150
+                    color: Qt.rgba(0.2,0.2,0.2,0.7)
+                    border.color: "#40E0D0"
+                    border.width: 1
+                    visible: false
+                    anchors.centerIn: parent
+                    radius: 5
+
+                    Text {
+                        id: promptarea_text
+                        text: qsTr("text")
+                        font.pointSize: 14
+                        color: "white"
+                        anchors.centerIn: parent
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            parent.visible = false;
+                        }
+                    }
+                  }
+
+
+         enter: Transition {
+                  NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 ; duration:200}
+              }
+         exit: Transition {
+                  NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 ;duration:200}
+              }
+    }
+
 
 }

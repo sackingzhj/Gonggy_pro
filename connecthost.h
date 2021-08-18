@@ -8,11 +8,15 @@
 class ConnectHost : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString username WRITE userName)
-    Q_PROPERTY(QString password WRITE passWord)
+    Q_PROPERTY(QString username READ username WRITE userName)
+    Q_PROPERTY(QString password READ password WRITE passWord)
 
 public:
     explicit ConnectHost(QObject *parent = nullptr);
+
+    QString username() const;
+
+    QString password() const;
 
     QString userName(const QString &username);
 
@@ -22,15 +26,20 @@ public:
 
 
 
+
+
 signals:
     void loginSuccessfully();
     void loginFailure();
+    void networkError();
+
 
 
 private:
     QTcpSocket *tcpSocket;
     QString name;
     QString pass;
+//    QString flag;
 
 };
 
