@@ -32,8 +32,30 @@ QString ConnectHost::passWord(const QString &password)
 }
 
 
+
+
 void ConnectHost::myConnentToSever()
 {
+    tcpSocket = new QTcpSocket(this);
+    QString ip = QString("192.168.198.133");
+    quint16 port = 12000;
+
+    tcpSocket->connectToHost(QHostAddress(ip),port);
+
+    if(tcpSocket->waitForConnected(10000))
+    {
+
+//        myDoConnent();
+    }else
+    {
+        emit networkError();
+    }
+
+}
+
+void ConnectHost::myDoConnent()
+{
+    qDebug() << "myDoConnent";
     enum sysCMD{
         _LOGIN_CMD,
         _LOGOUT_CMD,
@@ -55,7 +77,10 @@ void ConnectHost::myConnentToSever()
 
     };
 
-    _DataPackage data;
+    _DataPackage data = {};
+    qDebug() << "data._name1" << data._name;
+    qDebug() << "data._pass1" << data._pass;
+
     data._CMD = _LOGIN_CMD;
 
     char* ptr;
@@ -70,31 +95,25 @@ void ConnectHost::myConnentToSever()
     ptr2 = ba2.data();
     memcpy(data._pass,ptr2,10); //
 
+    qDebug() << "data._name2" << data._name;
+    qDebug() << "data._pass2" << data._pass;
+
     QByteArray bdata;
     bdata.resize(sizeof(_DataPackage));
     memcpy(bdata.data(), &data, sizeof(_DataPackage));
 
+    tcpSocket->write(bdata);
+
+}
 
 
-    tcpSocket = new QTcpSocket(this);
-    QString ip = QString("192.168.198.133");
-    quint16 port = 8888;
-
-
-    tcpSocket->connectToHost(QHostAddress(ip),port);
-
-    if(tcpSocket->waitForConnected(10000))
-    {
-
-       tcpSocket->write(bdata);
-    }else
-    {
-        emit networkError();
-    }
+void ConnectHost::readConnent()
+{
 
     connect(tcpSocket, &QTcpSocket::readyRead,
             [=]()
             {
+
                 char flag ={};
                 tcpSocket->read(&flag, sizeof (flag));
                 qDebug() << "flag" << flag;
@@ -105,7 +124,19 @@ void ConnectHost::myConnentToSever()
                 }
 
             }
-            );
+    );
+}
+
+
+
+void ConnectHost::closeConnent()
+{
+
+    tcpSocket->disconnectFromHost();
+}
+ConnectHost::~ ConnectHost()
+{
+  qDebug() << "xigou\n";
 }
 
 

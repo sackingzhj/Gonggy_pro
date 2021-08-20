@@ -199,6 +199,7 @@ Item {
                         if(root.isLogin === 1){
                             mainloader.source = "BusinessPage.qml"
                         }else{
+                            c_host_socket.myConnentToSever()
                             dialog.visible = true
                         }
 
@@ -340,6 +341,7 @@ Item {
                   anchors.top:parent.top
                   anchors.topMargin: 170
 
+
                   selectByMouse: true
 
                   onFocusReasonChanged:{
@@ -361,6 +363,7 @@ Item {
 
                   Component.onCompleted: {
                     forceActiveFocus()
+
 //                    cursorVisible:true
                   }
               }
@@ -403,11 +406,14 @@ Item {
 //                  inputMethodHints:Qt.ImhHiddenText | Qt.ImhNoPredictiveText
                   selectByMouse: true
 
+
                   onFocusChanged: {
-                  if ( !(text.length > 0) )
+                      var password_len = password_field.text
+
+                  if ( !(password_len.length > 0) )
                       {
                           pass_text_hint.visible = true
-                      }else( (text.length > 0) & (pass_text_hint.visible == true))
+                      }else( (password_len.length > 0) & (pass_text_hint.visible === true))
                       {
                           pass_text_hint.visible = false
                       }
@@ -430,6 +436,7 @@ Item {
 
               ConnectHost {
                   id: c_host_socket
+
                   username: username_field.text
                   password: password_field.text
 
@@ -447,10 +454,11 @@ Item {
                       if(root.isLogin === 0){
                           root.isLogin = 1
                       }
+                      c_host_socket.closeConnent()
                       mainloader.source = "BusinessPage.qml"
+
                   }
               }
-
 
                   Button {
                       width: 150
@@ -460,21 +468,25 @@ Item {
                       DialogButtonBox.buttonRole: DialogButtonBox.Ok
                       x:100
                       y:285
+
                       onClicked: {
-                            if(username_field.text.length >0 )
-                            {
-                                if(password_field.text > 0)
-                                {
-                                    c_host_socket.username = username_field.text
-                                    c_host_socket.password = password_field.text
-                                    c_host_socket.myConnentToSever()
-                                }else{
-                                        pass_text_hint.visible = true
-                                }
-                            }else{
-                                username_text_hint.visible = true
-                            }
+                          console.log('clicked')
+                          if(username_field.text.length >0 )
+                          {
+                              if(password_field.text > 0)
+                              {
+//                                  c_host_socket.myConnentToSever()
+                                  c_host_socket.username = username_field.text
+                                  c_host_socket.password = password_field.text
+                                  c_host_socket.myDoConnent()
+                              }else{
+                                      pass_text_hint.visible = true
+                              }
+                          }else{
+                              username_text_hint.visible = true
+                          }
                       }
+
                   }
 
                   Button {
@@ -487,6 +499,7 @@ Item {
                       onClicked: {
                           username_field.text = ""
                           password_field.text = ""
+                          c_host_socket.closeConnent()
                           dialog.reject()
 
                       }

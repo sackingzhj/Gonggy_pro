@@ -21,6 +21,7 @@ Window {
         Component.onCompleted: {
             mainloader.source = "WelcomePage.qml"
         }
+
     }
 
 

@@ -24,6 +24,13 @@ public:
 
     Q_INVOKABLE  void myConnentToSever();
 
+    Q_INVOKABLE  void myDoConnent();
+
+    Q_INVOKABLE  void closeConnent();
+    Q_INVOKABLE  void readConnent();
+
+     ~ ConnectHost();
+
 
 
 
