@@ -27,7 +27,7 @@ public:
     Q_INVOKABLE  void myDoConnent();
 
     Q_INVOKABLE  void closeConnent();
-    Q_INVOKABLE  void readConnent();
+//    Q_INVOKABLE  void readConnent();
 
      ~ ConnectHost();
 

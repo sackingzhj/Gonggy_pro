@@ -199,7 +199,7 @@ Item {
                         if(root.isLogin === 1){
                             mainloader.source = "BusinessPage.qml"
                         }else{
-                            c_host_socket.myConnentToSever()
+
                             dialog.visible = true
                         }
 
@@ -478,6 +478,7 @@ Item {
 //                                  c_host_socket.myConnentToSever()
                                   c_host_socket.username = username_field.text
                                   c_host_socket.password = password_field.text
+                                  c_host_socket.myConnentToSever()
                                   c_host_socket.myDoConnent()
                               }else{
                                       pass_text_hint.visible = true

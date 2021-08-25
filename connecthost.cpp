@@ -37,7 +37,7 @@ QString ConnectHost::passWord(const QString &password)
 void ConnectHost::myConnentToSever()
 {
     tcpSocket = new QTcpSocket(this);
-    QString ip = QString("192.168.198.133");
+    QString ip = QString("123.57.51.96"); //192.168.198.133
     quint16 port = 12000;
 
     tcpSocket->connectToHost(QHostAddress(ip),port);
@@ -56,32 +56,57 @@ void ConnectHost::myConnentToSever()
 void ConnectHost::myDoConnent()
 {
     qDebug() << "myDoConnent";
-    enum sysCMD{
+//    enum sysCMD{
+//        _LOGIN_CMD,
+//        _LOGOUT_CMD,
+//        _ERROR_CMD
+//    };
+
+//    struct CMD{
+//        short _CMD;
+//        short sysCMD_LEN;
+//    };
+
+//    struct _DataPackage:public CMD{
+//        _DataPackage()
+//        {
+//            sysCMD_LEN = sizeof (_DataPackage);
+//        }
+//        char _name[32];
+//        char _pass[32];
+
+//    };
+
+    enum sysCMD {
         _LOGIN_CMD,
         _LOGOUT_CMD,
         _ERROR_CMD
     };
 
-    struct CMD{
-        short _CMD;
+    struct CMDHead {
+        sysCMD cmdOrder;
         short sysCMD_LEN;
     };
 
-    struct _DataPackage:public CMD{
-        _DataPackage()
+    struct CMD_Result{
+        bool isSucced = false;
+    };
+
+    struct loginData :public CMDHead {
+        loginData()
         {
-            sysCMD_LEN = sizeof (_DataPackage);
+            sysCMD_LEN = sizeof(loginData);
         }
         char _name[32];
         char _pass[32];
 
     };
 
-    _DataPackage data = {};
+    loginData data = {};
     qDebug() << "data._name1" << data._name;
     qDebug() << "data._pass1" << data._pass;
 
-    data._CMD = _LOGIN_CMD;
+    data.cmdOrder = _LOGIN_CMD;
 
     char* ptr;
     QByteArray ba;
@@ -99,17 +124,11 @@ void ConnectHost::myDoConnent()
     qDebug() << "data._pass2" << data._pass;
 
     QByteArray bdata;
-    bdata.resize(sizeof(_DataPackage));
-    memcpy(bdata.data(), &data, sizeof(_DataPackage));
+    bdata.resize(sizeof(loginData));
+    memcpy(bdata.data(), &data, sizeof(loginData));
 
     tcpSocket->write(bdata);
-
-}
-
-
-void ConnectHost::readConnent()
-{
-
+//    tcpSocket->write("bdata");
     connect(tcpSocket, &QTcpSocket::readyRead,
             [=]()
             {
@@ -125,9 +144,8 @@ void ConnectHost::readConnent()
 
             }
     );
+
 }
-
-
 
 void ConnectHost::closeConnent()
 {
