@@ -37,7 +37,7 @@ QString ConnectHost::passWord(const QString &password)
 void ConnectHost::myConnentToSever()
 {
     tcpSocket = new QTcpSocket(this);
-    QString ip = QString("123.57.51.96"); //192.168.198.133
+    QString ip = QString("192.168.198.133"); //192.168.198.133 //123.57.51.96
     quint16 port = 12000;
 
     tcpSocket->connectToHost(QHostAddress(ip),port);

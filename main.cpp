@@ -5,6 +5,7 @@
 #include "connecthost.h"
 #include "myreadjson.h"
 #include "udpconnect.h"
+#include "QTableView"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     qmlRegisterType<ConnectHost>("ConnectHost", 1,0,"ConnectHost");
+    qmlRegisterType<QTableView>("QTableView", 1,0,"QTableView");
 //    qmlRegisterType<MyReadJson>("MyReadJson", 1, 0, "MyReadJson");
 //    qmlRegisterType<UdpConnect>("UdpConnect", 1, 0, "UdpConnect");
 

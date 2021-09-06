@@ -13,7 +13,7 @@ Window {
     title: qsTr("工管云_工程施工信息化管理云平台")
     property string page_xml: ""
     property string page_title_xml: ""
-    property int isLogin: 0
+    property int isLogin: 1
 
     Loader {
         id:mainloader
